@@ -9,7 +9,7 @@
 # PRODUCTS/SERVICES AS PROVIDED BY QUALYS.
 #
 ################################################################################
-echo "test1"
+
 
 #set -e
 set -x
@@ -26,6 +26,7 @@ QUALYS_API_SERVER=$1
 USERNAME=$2
 PASSWORD=$3
 IMAGE=$4
+TOKEN=""
 
 check_command_exists () {
     echo "This script requires $1 but it's not installed. Aborting."
@@ -34,7 +35,7 @@ check_command_exists () {
 
 get_result () {
 	echo "Getting result for ${IMAGE_ID}"
-	CURL_COMMAND="$CURL -s -X GET ${GET_IMAGE_VULNS_URL} -u ${USERNAME}:${PASSWORD} -L -w\\n%{http_code} -o ${IMAGE_ID}.json"
+	CURL_COMMAND="$CURL -s -X GET ${GET_IMAGE_VULNS_URL} --header 'Authorization: Bearer $TOKEN' -u ${USERNAME}:${PASSWORD} -L -w\\n%{http_code} -o ${IMAGE_ID}.json"
 	HTTP_CODE=$($CURL_COMMAND | tail -n 1)
 	echo "HTTP Code: ${HTTP_CODE}"
 	if [ "$HTTP_CODE" == "200" ]; then
@@ -99,8 +100,17 @@ else
 	IMAGE_ID=${IMAGE}
 fi
 
+QUALYS_API_SERVER=$1
+USERNAME=$2
+PASSWORD=$3
+IMAGE=$4
+
+
+TOKEN=$(curl -s -X POST   $QUALYS_API_SERVER/auth -d 'username=$USERNAME&password=$PASSWORD&token=true' -H 'Content-Type: application/x-www-form-urlencoded') 
+
+
 echo "Image id belonging to ${IMAGE} is: ${IMAGE_ID}"
-GET_IMAGE_VULNS_URL="${QUALYS_API_SERVER}/csapi/v1.1/images/${IMAGE_ID}"
+GET_IMAGE_VULNS_URL="${QUALYS_API_SERVER}/csapi/v1.3/images/${IMAGE_ID}"
 echo ${GET_IMAGE_VULNS_URL}
 
 echo "Temporarily tagging image ${IMAGE} with qualys_scan_target:${IMAGE_ID}"
