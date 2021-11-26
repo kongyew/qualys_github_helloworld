@@ -77,7 +77,8 @@ jobs:
         ls ./.github/workflows/
         ls /home/runner/work/qualys_github_helloworld/qualys_github_helloworld/.github/workflows/qualysscript.sh 
       shell: bash
-
+    - name: Install curl jq
+      run: sudo apt-get install curl jq
     - name: Check the images
       shell: bash
       env:
