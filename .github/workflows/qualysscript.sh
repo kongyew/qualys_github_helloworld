@@ -101,6 +101,8 @@ fi
 
 TOKEN=$(curl -s -X POST   $QUALYS_API_SERVER/auth -d 'username=$USERNAME&password=$PASSWORD&token=true' -H 'Content-Type: application/x-www-form-urlencoded') 
 
+echo "TOKEN : $TOKEN"
+
 
 echo "Image id belonging to ${IMAGE} is: ${IMAGE_ID}"
 GET_IMAGE_VULNS_URL="${QUALYS_API_SERVER}/csapi/v1.3/images/${IMAGE_ID}"
