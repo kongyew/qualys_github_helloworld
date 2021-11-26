@@ -65,7 +65,7 @@ jobs:
         files: "/home/runner/work/qualys_github_helloworld/.github/workflows/qualysscript.sh"
     - name: show ls
       run: |
-        ls
+        ls ./.github/workflows/
       shell: bash
 
     - name: Check the images
