@@ -12,11 +12,7 @@ name: Sysdig - Build, scan, push and upload sarif report
 #     branches: [ $default-branch ]
 #   schedule:
 #     - cron: $cron-weekly
-on:
-  push:
-    branches:
-      - master
-  pull_request:
+on: [push]
 jobs:
 
   build:
