@@ -92,7 +92,10 @@ jobs:
           echo "digest: ${{ env.DIGEST }}"
           #cat "${GITHUB_WORKSPACE}/.github/workflows/qualysscript.sh"  
           chmod +x "${GITHUB_WORKSPACE}/.github/workflows/qualysscript.sh"
-          
+          CURL=$(which curl)
+          JQ=$(which jq)
+          DOCKER=$(which docker)
+
           "${GITHUB_WORKSPACE}/.github/workflows/qualysscript.sh $QUALYS_URL $QUALYS_USER $QUALYS_PASSWORD ${{ env.DIGEST }} "   
     - name: Sleep 
       env:
