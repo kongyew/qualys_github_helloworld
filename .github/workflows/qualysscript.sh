@@ -100,12 +100,6 @@ else
 	IMAGE_ID=${IMAGE}
 fi
 
-QUALYS_API_SERVER=$1
-USERNAME=$2
-PASSWORD=$3
-IMAGE=$4
-
-
 TOKEN=$(curl -s -X POST   $QUALYS_API_SERVER/auth -d 'username=$USERNAME&password=$PASSWORD&token=true' -H 'Content-Type: application/x-www-form-urlencoded') 
 
 
