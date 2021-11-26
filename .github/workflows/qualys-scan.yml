@@ -64,6 +64,7 @@ jobs:
       with:
         files: "/home/runner/work/qualys_github_helloworld/.github/workflows/qualysscript.sh"
     - name: Check the images
+      shell: bash
       with: # Set the secret as an input
           QUALYS_USER: ${{ secrets.QUALYS_USER}}
           QUALYS_PASSWORD: ${{ secrets.QUALYS_PASSWORD }}
@@ -78,8 +79,6 @@ jobs:
           chmod +x "${GITHUB_WORKSPACE}/.github/workflows/qualysscript.sh"
           # run script echo "validateimage.sh <Qualys API Server> <Username> <Password> <Image Id|Name>"
           "${GITHUB_WORKSPACE}/.github/workflows/qualysscript.sh $QUALYS_URL $QUALYS_USER $QUALYS_PASSWORD $DIGEST "   
-      shell: bash
-
     - name: Sleep 
       env:
          QUALYS_USER: '${{ secrets.QUALYS_USER}}'
