@@ -89,12 +89,11 @@ jobs:
          TEST_SECRET: ${{ secrets.TEST_SECRET }}
          QUALYS_URL : 'https://qualysguard.qg2.apps.qualys.com'
       run: |
-          chmod +x "${GITHUB_WORKSPACE}/.github/workflows/script1.sh"
           echo "test : $TEST_SECRET"
           echo "USER : $QUALYS_USER"
           echo "digest: ${{ env.DIGEST }}"
           #cat "${GITHUB_WORKSPACE}/.github/workflows/qualysscript.sh"  
-          #chmod +x "${GITHUB_WORKSPACE}/.github/workflows/qualysscript.sh"
+          chmod +x "${GITHUB_WORKSPACE}/.github/workflows/qualysscript.sh"
           CURL=$(which curl)
           JQ=$(which jq)
           DOCKER=$(which docker)
