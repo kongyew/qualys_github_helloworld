@@ -27,8 +27,9 @@ jobs:
       # Change ${{ github.repository }} variable by another image name if you want but don't forget changing also image-tag below
       run: docker build . --file Dockerfile --tag ${{ github.repository }}:latest
     # reference : https://www.youtube.com/watch?v=dHuksXTLA2k
+
     - name: Qualys
-    - run: |
+      run: |
           chmod +x "${GITHUB_WORKSPACE}/.github/script.sh"
           # run script
           "${GITHUB_WORKSPACE}/.github/script.sh"
