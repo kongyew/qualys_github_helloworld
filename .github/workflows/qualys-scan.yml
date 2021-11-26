@@ -40,8 +40,9 @@ jobs:
           export TAG="qualys_scan_target:$DIGEST"
 
     - name: Tag docker  
-      run: docker tag ${{ github.repository }}:latest $TAG
-
+      run: 
+          echo "TAG= $TAG"
+          docker tag ${{ github.repository }}:latest $TAG
 
     # reference : https://www.youtube.com/watch?v=dHuksXTLA2k
 
