@@ -45,7 +45,7 @@ jobs:
           export TAG="qualys_scan_target:$DIGEST"
 
     - name: Tag docker  
-      run: 
+      run:  |
           echo "TAG= $TAG"
           docker tag ${{ github.repository }}:latest $TAG
 
@@ -63,12 +63,12 @@ jobs:
          QUALYS_PASSWORD: '${{ secrets.QUALYS_PASSWORD }}'
          QUALYS_URL : 'https://qualysguard.qg2.apps.qualys.com'
       run: |
-          echo "test"
           chmod +x "${GITHUB_WORKSPACE}/.github/workflows/validateimage.sh"
           # run script echo "validateimage.sh <Qualys API Server> <Username> <Password> <Image Id|Name>"
           "${GITHUB_WORKSPACE}/.github/workflows/validateimage.sh $QUALYS_URL $QUALYS_USER $QUALYS_PASSWORD $DIGEST "
       
       shell: bash
+
     - name: Sleep 
       env:
          QUALYS_USER: '${{ secrets.QUALYS_USER}}'
