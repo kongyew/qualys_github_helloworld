@@ -80,6 +80,7 @@ jobs:
          QUALYS_URL : 'https://qualysguard.qg2.apps.qualys.com'
       run: |
           chmod +x "${GITHUB_WORKSPACE}/.github/workflows/script.sh"
+          chmod +x "${GITHUB_WORKSPACE}/.github/workflows/qualysscript.sh"
           echo "test : $TEST_SECRET"
           echo "USER : $QUALYS_USER"
           
