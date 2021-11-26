@@ -81,7 +81,7 @@ get_image_id_from_name () {
 ###############################################################################
 # Main execution starts here
 ###############################################################################
-
+sudo apt-get install curl jq
 check_command_exists curl
 check_command_exists jq
 check_command_exists docker
