@@ -18,7 +18,7 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    environment: production
+    environment: QUALYS_USER
     steps:
     - uses: actions/checkout@v2
 
