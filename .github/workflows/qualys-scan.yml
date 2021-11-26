@@ -63,6 +63,11 @@ jobs:
       uses: andstor/file-existence-action@v1
       with:
         files: "/home/runner/work/qualys_github_helloworld/.github/workflows/qualysscript.sh"
+    - name: show ls
+      run: |
+        ls
+      shell: bash
+
     - name: Check the images
       shell: bash
       env:
