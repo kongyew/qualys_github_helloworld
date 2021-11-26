@@ -38,6 +38,7 @@ PASSWORD=$3
 IMAGE=$4
 
 check_command_exists () {
+    echo "This script requires $1 but it's not installed. Aborting."
 	hash $1 2>/dev/null || { echo >&2 "This script requires $1 but it's not installed. Aborting."; exit 1; }
 }
 
