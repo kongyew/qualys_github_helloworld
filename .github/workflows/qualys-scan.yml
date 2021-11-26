@@ -37,14 +37,11 @@ jobs:
       # Tag image to be built
       # Change ${{ github.repository }} variable by another image name if you want but don't forget changing also image-tag below
       run: docker build . --file Dockerfile --tag ${{ github.repository }}:latest
-
-  
     - name: Get sha
-      #imagehash=$(docker push repo/image:tag | grep sha | cut -d ' ' -f 3)
       run: |
         export SHA256=$(docker images --no-trunc --quiet ${{ github.repository }}:latest)
+        echo "{SHA256}={$SHA256}" >> $GITHUB_ENV 
         echo "SHA256: $SHA256" 
-        echo "{SHA256}=$SHA256" >> $GITHUB_ENV 
       shell: bash
     - name: Get digest
       #imagehash=$(docker push repo/image:tag | grep sha | cut -d ' ' -f 3)
@@ -54,8 +51,8 @@ jobs:
           export TAG="qualys_scan_target:$DIGEST"
           echo "DIGEST: $DIGEST" 
           echo "TAG: $TAG" 
-          echo "{DIGEST}=$DIGEST" >> $GITHUB_ENV 
-          echo "{TAG}=$TAG" >> $GITHUB_ENV 
+          echo "{DIGEST}={$DIGEST}" >> $GITHUB_ENV 
+          echo "{TAG}={$TAG}" >> $GITHUB_ENV 
 
       shell: bash
     - name: Tag docker  
