@@ -92,9 +92,8 @@ jobs:
           echo "USER : $QUALYS_USER"
           echo "digest: ${{ env.DIGEST }}"
           
-          chmod +x "/home/runner/work/qualys_github_helloworld/qualys_github_helloworld/.github/workflows/qualysscript.sh"
           # run script echo "validateimage.sh <Qualys API Server> <Username> <Password> <Image Id|Name>"
-          "${GITHUB_WORKSPACE}/.github/workflows/qualysscript.sh $QUALYS_URL $QUALYS_USER $QUALYS_PASSWORD ${{ env.digest }} "   
+          "${GITHUB_WORKSPACE}/.github/workflows/qualysscript.sh $QUALYS_URL $QUALYS_USER $QUALYS_PASSWORD ${{ env.DIGEST }} "   
     - name: Sleep 
       env:
          QUALYS_USER: '${{ secrets.QUALYS_USER}}'
