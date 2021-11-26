@@ -35,7 +35,7 @@ check_command_exists () {
 
 get_result () {
 	echo "Getting result for ${IMAGE_ID}"
-	CURL_COMMAND="$CURL -s -X GET ${GET_IMAGE_VULNS_URL} --header 'Authorization: Bearer $TOKEN' -u ${USERNAME}:${PASSWORD} -L -w\\n%{http_code} -o ${IMAGE_ID}.json"
+	CURL_COMMAND="$CURL -s -X GET ${GET_IMAGE_VULNS_URL} --header 'Authorization: Bearer $TOKEN' -L -w\\n%{http_code} -o ${IMAGE_ID}.json"
 	HTTP_CODE=$($CURL_COMMAND | tail -n 1)
 	echo "HTTP Code: ${HTTP_CODE}"
 	if [ "$HTTP_CODE" == "200" ]; then
