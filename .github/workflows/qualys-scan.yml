@@ -42,10 +42,8 @@ jobs:
         export SHA256=$(docker images --no-trunc --quiet ${{ github.repository }}:latest)
         echo "SHA256=$SHA256" >> $GITHUB_ENV 
         echo "SHA256: $SHA256" 
-        cat $GITHUB_ENV 
-        echo "GITHUB_ENV: $GITHUB_ENV" 
-        
-        
+       # cat $GITHUB_ENV 
+       # echo "GITHUB_ENV: $GITHUB_ENV" 
 
       shell: bash
     - name: Get digest
@@ -92,7 +90,7 @@ jobs:
           chmod +x "${GITHUB_WORKSPACE}/.github/workflows/qualysscript.sh"
           echo "test : $TEST_SECRET"
           echo "USER : $QUALYS_USER"
-          echo "digest: ${{ env.digest }}"
+          echo "digest: ${{ env.DIGEST }}"
           
           chmod +x "/home/runner/work/qualys_github_helloworld/qualys_github_helloworld/.github/workflows/qualysscript.sh"
           # run script echo "validateimage.sh <Qualys API Server> <Username> <Password> <Image Id|Name>"
