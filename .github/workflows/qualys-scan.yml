@@ -40,7 +40,7 @@ jobs:
       
 
     - name: Tag docker  
-      run: docker tag ${{ github.repository }}:latest qualys_scan_target:${{DIGEST}}
+      run: docker tag ${{ github.repository }}:latest qualys_scan_target:${ DIGEST }
 
 
     # reference : https://www.youtube.com/watch?v=dHuksXTLA2k
