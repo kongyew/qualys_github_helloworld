@@ -40,8 +40,9 @@ jobs:
     - name: Get sha
       run: |
         export SHA256=$(docker images --no-trunc --quiet ${{ github.repository }}:latest)
-        echo "{SHA256}={$SHA256}" >> $GITHUB_ENV 
+        echo "{SHA256}=$SHA256" >> $GITHUB_ENV 
         echo "SHA256: $SHA256" 
+        cat $GITHUB_ENV 
         echo "GITHUB_ENV: $GITHUB_ENV" 
         
         
