@@ -40,7 +40,7 @@ jobs:
     - name: Get sha
       run: |
         export SHA256=$(docker images --no-trunc --quiet ${{ github.repository }}:latest)
-        echo "{SHA256}=$SHA256" >> $GITHUB_ENV 
+        echo "SHA256=$SHA256" >> $GITHUB_ENV 
         echo "SHA256: $SHA256" 
         cat $GITHUB_ENV 
         echo "GITHUB_ENV: $GITHUB_ENV" 
@@ -56,8 +56,8 @@ jobs:
           export TAG="qualys_scan_target:$DIGEST"
           echo "DIGEST: $DIGEST" 
           echo "TAG: $TAG" 
-          echo "{DIGEST}={$DIGEST}" >> $GITHUB_ENV 
-          echo "{TAG}={$TAG}" >> $GITHUB_ENV 
+          echo "DIGEST=$DIGEST" >> $GITHUB_ENV 
+          echo "TAG=$TAG" >> $GITHUB_ENV 
 
       shell: bash
     - name: Tag docker  
