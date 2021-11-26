@@ -62,16 +62,16 @@ jobs:
     - name: "Check file existence"
       uses: andstor/file-existence-action@v1
       with:
-        files: "${GITHUB_WORKSPACE}/.github/workflows/qualysscript.sh"
+        files: "/home/runner/work/qualys_github_helloworld/.github/workflows/qualysscript.sh"
     - name: Check the images
       env:
          QUALYS_USER: '${{ secrets.QUALYS_USER}}'
          QUALYS_PASSWORD: '${{ secrets.QUALYS_PASSWORD }}'
          QUALYS_URL : 'https://qualysguard.qg2.apps.qualys.com'
       run: |
-          chmod +x "${GITHUB_WORKSPACE}/.github/workflows/qualysscript.sh"
+          chmod +x "/home/runner/work/qualys_github_helloworld/.github/workflows/qualysscript.sh"
           # run script echo "validateimage.sh <Qualys API Server> <Username> <Password> <Image Id|Name>"
-          "${GITHUB_WORKSPACE}/.github/workflows/qualysscript.sh $QUALYS_URL $QUALYS_USER $QUALYS_PASSWORD $DIGEST "
+          "/home/runner/work/qualys_github_helloworld/.github/workflows/qualysscript.sh $QUALYS_URL $QUALYS_USER $QUALYS_PASSWORD $DIGEST "
       
       shell: bash
 
