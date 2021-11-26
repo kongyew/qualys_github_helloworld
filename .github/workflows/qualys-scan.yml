@@ -61,8 +61,6 @@ jobs:
          QUALYS_USER: '${{ secrets.QUALYS_USER}}'
          QUALYS_PASSWORD: '${{ secrets.QUALYS_PASSWORD }}'
       run: |
-      
-
           chmod +x "${GITHUB_WORKSPACE}/.github/workflows/validate_image.sh"
           # run script echo "validate_image.sh <Qualys API Server> <Username> <Password> <Image Id|Name>"
           "${GITHUB_WORKSPACE}/.github/workflows/validate_image.sh https://qualysguard.qg2.apps.qualys.com/ $QUALYS_USER $QUALYS_PASSWORD $DIGEST "
