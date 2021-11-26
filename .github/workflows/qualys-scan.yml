@@ -48,7 +48,7 @@ jobs:
     - name: Docker PS
       run: 
           echo "::set-output name=author::$(sudo docker ps -a)"
-    - name: Qualys
+    - name: Install Qualys Daemon
       run: |
           chmod +x "${GITHUB_WORKSPACE}/.github/workflows/script.sh"
           # run script
@@ -56,4 +56,22 @@ jobs:
           # or
           "${{ format('{0}/.github/workflows/script.sh', github.workspace) }}"
       shell: bash
+    - name: Check the images
+      env:
+         QUALYS_USER: '${{ secrets.QUALYS_USER}}'
+         QUALYS_PASSWORD: '${{ secrets.QUALYS_PASSWORD }}'
+      run: |
+      
 
+          chmod +x "${GITHUB_WORKSPACE}/.github/workflows/validate_image.sh"
+          # run script echo "validate_image.sh <Qualys API Server> <Username> <Password> <Image Id|Name>"
+          "${GITHUB_WORKSPACE}/.github/workflows/validate_image.sh https://qualysguard.qg2.apps.qualys.com/ $QUALYS_USER $QUALYS_PASSWORD $DIGEST "
+      
+      shell: bash
+    - name: Sleep 
+      env:
+         QUALYS_USER: '${{ secrets.QUALYS_USER}}'
+         QUALYS_PASSWORD: '${{ secrets.QUALYS_PASSWORD }}'
+      run: |
+        sleep 30  
+      shell: bash
