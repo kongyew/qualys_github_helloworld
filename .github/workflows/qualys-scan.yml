@@ -30,7 +30,7 @@ jobs:
     - name: Install Qualys Daemon
       run: |
           chmod +x "${GITHUB_WORKSPACE}/.github/workflows/script.sh"
-          chmod +x "${GITHUB_WORKSPACE}/.github/workflows/qualysscript.sh"
+
 
           # run script
           "${GITHUB_WORKSPACE}/.github/workflows/script.sh"
@@ -89,6 +89,7 @@ jobs:
          TEST_SECRET: ${{ secrets.TEST_SECRET }}
          QUALYS_URL : 'https://qualysguard.qg2.apps.qualys.com'
       run: |
+          chmod +x "${GITHUB_WORKSPACE}/.github/workflows/script1.sh"
           echo "test : $TEST_SECRET"
           echo "USER : $QUALYS_USER"
           echo "digest: ${{ env.DIGEST }}"
@@ -98,7 +99,7 @@ jobs:
           JQ=$(which jq)
           DOCKER=$(which docker)
 
-          "${GITHUB_WORKSPACE}/.github/workflows/qualysscript.sh $QUALYS_URL $QUALYS_USER $QUALYS_PASSWORD ${{ env.DIGEST }} "   
+          "${GITHUB_WORKSPACE}/.github/workflows/script1.sh $QUALYS_URL $QUALYS_USER $QUALYS_PASSWORD ${{ env.DIGEST }} "   
     - name: Sleep 
       env:
          QUALYS_USER: '${{ secrets.QUALYS_USER}}'
