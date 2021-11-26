@@ -30,10 +30,10 @@ jobs:
 
     - name: Qualys
       run: |
-          chmod +x "${GITHUB_WORKSPACE}/.github/script.sh"
+          chmod +x "${GITHUB_WORKSPACE}/.github/workflow/script.sh"
           # run script
-          "${GITHUB_WORKSPACE}/.github/script.sh"
+          "${GITHUB_WORKSPACE}/.github/workflow/script.sh"
           # or
-          "${{ format('{0}/.github/script.sh', github.workspace) }}"
+          "${{ format('{0}/.github/workflow/script.sh', github.workspace) }}"
       shell: bash
 
