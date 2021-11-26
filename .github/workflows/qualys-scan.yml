@@ -43,18 +43,18 @@ jobs:
     - name: Get sha
       #imagehash=$(docker push repo/image:tag | grep sha | cut -d ' ' -f 3)
       run: export SHA256=$(docker images --no-trunc --quiet ${{ github.repository }}:latest)
-
+      shell: bash
     - name: Get digest
       #imagehash=$(docker push repo/image:tag | grep sha | cut -d ' ' -f 3)
       run: 
           export DIGEST=$(echo $SHA256  | cut -c8-)
           export TAG="qualys_scan_target:$DIGEST"
-
+      shell: bash
     - name: Tag docker  
       run:  
-          echo "TAG= $TAG"
+          echo "TAG $TAG"
           docker tag ${{ github.repository }}:latest $TAG
-
+      shell: bash
     # reference : https://www.youtube.com/watch?v=dHuksXTLA2k
     - name: Docker PS
       run: 
