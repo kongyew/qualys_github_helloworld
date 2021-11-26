@@ -11,8 +11,8 @@
 ################################################################################
 
 
-set -e
-#set -x
+#set -e
+set -x
 
 if [ $# -lt 4 ]; then
 	echo "All required arguments not provided."
