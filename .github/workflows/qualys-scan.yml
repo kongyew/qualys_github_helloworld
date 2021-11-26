@@ -26,6 +26,14 @@ jobs:
       # Tag image to be built
       # Change ${{ github.repository }} variable by another image name if you want but don't forget changing also image-tag below
       run: docker build . --file Dockerfile --tag ${{ github.repository }}:latest
+    - name: Get sha
+      #imagehash=$(docker push repo/image:tag | grep sha | cut -d ' ' -f 3)
+      run: export SHA256=$(docker images --no-trunc --quiet ${{ github.repository }}:latest)
+
+    - name: Tag docker  
+      run: docker tag ${{ github.repository }}:latest qualys_scan_target:$SHA256
+
+
     # reference : https://www.youtube.com/watch?v=dHuksXTLA2k
 
     - name: Qualys
