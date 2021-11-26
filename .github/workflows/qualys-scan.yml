@@ -65,10 +65,6 @@ jobs:
         files: "/home/runner/work/qualys_github_helloworld/.github/workflows/qualysscript.sh"
     - name: Check the images
       shell: bash
-      with: # Set the secret as an input
-          QUALYS_USER: ${{ secrets.QUALYS_USER}}
-          QUALYS_PASSWORD: ${{ secrets.QUALYS_PASSWORD }}
-          TEST_SECRET: ${{ secrets.TEST_SECRET }}
       env:
          QUALYS_USER: ${{ secrets.QUALYS_USER}}
          QUALYS_PASSWORD: ${{ secrets.QUALYS_PASSWORD }}
