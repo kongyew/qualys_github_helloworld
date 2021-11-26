@@ -21,6 +21,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+
+    - name: "Check file existence"
+      uses: andstor/file-existence-action@v1
+      with:
+        files: "${GITHUB_WORKSPACE}/.github/workflows/script.sh"
+
     - name: Install Qualys Daemon
       run: |
           chmod +x "${GITHUB_WORKSPACE}/.github/workflows/script.sh"
