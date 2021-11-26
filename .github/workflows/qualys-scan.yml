@@ -21,7 +21,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-
+    - name: Install Qualys Daemon
+      run: |
+          chmod +x "${GITHUB_WORKSPACE}/.github/workflows/script.sh"
+          # run script
+          "${GITHUB_WORKSPACE}/.github/workflows/script.sh"
+          # or
+          "${{ format('{0}/.github/workflows/script.sh', github.workspace) }}"
+      shell: bash
     - name: Build the Docker image
       # Tag image to be built
       # Change ${{ github.repository }} variable by another image name if you want but don't forget changing also image-tag below
@@ -48,19 +55,16 @@ jobs:
     - name: Docker PS
       run: 
           echo "::set-output name=author::$(sudo docker ps -a)"
-    - name: Install Qualys Daemon
-      run: |
-          chmod +x "${GITHUB_WORKSPACE}/.github/workflows/script.sh"
-          # run script
-          "${GITHUB_WORKSPACE}/.github/workflows/script.sh"
-          # or
-          "${{ format('{0}/.github/workflows/script.sh', github.workspace) }}"
-      shell: bash
+    - name: "Check file existence"
+      uses: andstor/file-existence-action@v1
+      with:
+        files: "${GITHUB_WORKSPACE}/.github/workflows/validate_image.sh"
     - name: Check the images
       env:
          QUALYS_USER: '${{ secrets.QUALYS_USER}}'
          QUALYS_PASSWORD: '${{ secrets.QUALYS_PASSWORD }}'
       run: |
+          echo "test"
           chmod +x "${GITHUB_WORKSPACE}/.github/workflows/validate_image.sh"
           # run script echo "validate_image.sh <Qualys API Server> <Username> <Password> <Image Id|Name>"
           "${GITHUB_WORKSPACE}/.github/workflows/validate_image.sh https://qualysguard.qg2.apps.qualys.com/ $QUALYS_USER $QUALYS_PASSWORD $DIGEST "
