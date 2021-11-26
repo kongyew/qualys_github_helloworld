@@ -43,21 +43,25 @@ jobs:
       #imagehash=$(docker push repo/image:tag | grep sha | cut -d ' ' -f 3)
       run: |
         export SHA256=$(docker images --no-trunc --quiet ${{ github.repository }}:latest)
-        echo "SHA256: $SHA256"  
+        echo "SHA256: $SHA256" 
+        echo "{SHA256}=$SHA256" >> $GITHUB_ENV 
       shell: bash
     - name: Get digest
       #imagehash=$(docker push repo/image:tag | grep sha | cut -d ' ' -f 3)
       run: |
           echo "SHA256: $SHA256"  
-          export DIGEST=$(echo $SHA256  | cut -c8-)
+          export DIGEST=$(echo ${{ env.SHA256 }}  | cut -c8-)
           export TAG="qualys_scan_target:$DIGEST"
           echo "DIGEST: $DIGEST" 
           echo "TAG: $TAG" 
+          echo "{DIGEST}=$DIGEST" >> $GITHUB_ENV 
+          echo "{TAG}=$TAG" >> $GITHUB_ENV 
+
       shell: bash
     - name: Tag docker  
       run:  
-          echo "TAG $TAG"
-          docker tag ${{ github.repository }}:latest $TAG
+          echo "TAG ${{ env.TAG }}"
+          docker tag ${{ github.repository }}:latest ${{ env.TAG }}
       shell: bash
     # reference : https://www.youtube.com/watch?v=dHuksXTLA2k
     - name: Docker PS
@@ -87,11 +91,11 @@ jobs:
           chmod +x "${GITHUB_WORKSPACE}/.github/workflows/qualysscript.sh"
           echo "test : $TEST_SECRET"
           echo "USER : $QUALYS_USER"
-          echo "digest: $DIGEST"
+          echo "digest: ${{ env.digest }}"
           
           chmod +x "/home/runner/work/qualys_github_helloworld/qualys_github_helloworld/.github/workflows/qualysscript.sh"
           # run script echo "validateimage.sh <Qualys API Server> <Username> <Password> <Image Id|Name>"
-          "${GITHUB_WORKSPACE}/.github/workflows/qualysscript.sh $QUALYS_URL $QUALYS_USER $QUALYS_PASSWORD $DIGEST "   
+          "${GITHUB_WORKSPACE}/.github/workflows/qualysscript.sh $QUALYS_URL $QUALYS_USER $QUALYS_PASSWORD ${{ env.digest }} "   
     - name: Sleep 
       env:
          QUALYS_USER: '${{ secrets.QUALYS_USER}}'
