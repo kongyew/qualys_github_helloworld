@@ -47,7 +47,7 @@ jobs:
       shell: bash
     - name: Get digest
       #imagehash=$(docker push repo/image:tag | grep sha | cut -d ' ' -f 3)
-      run: 
+      run: |
           export DIGEST=$(echo $SHA256  | cut -c8-)
           export TAG="qualys_scan_target:$DIGEST"
           echo "DIGEST: $DIGEST" 
