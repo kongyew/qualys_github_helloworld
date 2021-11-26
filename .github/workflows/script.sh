@@ -1,0 +1,1 @@
+sudo ./installsensor.sh ActivationId=be2bcfe0-21dd-4108-ab9f-26976c435ed7 CustomerId=dd6ac00f-cac2-5630-82f9-44cb9fcee66c Storage=/usr/local/qualys/sensor/data -s -c
