@@ -1,0 +1,38 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Qualys - Build, scan, push and upload sarif report
+
+# on:
+#   push:
+#     branches: [ $default-branch, $protected-branches ]
+#   pull_request:
+#     branches: [ $default-branch ]
+#   schedule:
+#     - cron: $cron-weekly
+on: [push]
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Build the Docker image
+      # Tag image to be built
+      # Change ${{ github.repository }} variable by another image name if you want but don't forget changing also image-tag below
+      run: docker build . --file Dockerfile --tag ${{ github.repository }}:latest
+
+    - name: Qualys
+    - run: |
+          chmod +x "${GITHUB_WORKSPACE}/.github/script.sh"
+          # run script
+          "${GITHUB_WORKSPACE}/.github/script.sh"
+          # or
+          "${{ format('{0}/.github/script.sh', github.workspace) }}"
+      shell: bash
+
