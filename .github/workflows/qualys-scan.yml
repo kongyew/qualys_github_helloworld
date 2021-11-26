@@ -65,9 +65,9 @@ jobs:
         files: "/home/runner/work/qualys_github_helloworld/.github/workflows/qualysscript.sh"
     - name: Check the images
       env:
-         QUALYS_USER: '${{ secrets.QUALYS_USER}}'
-         QUALYS_PASSWORD: '${{ secrets.QUALYS_PASSWORD }}'
-         TEST_SECRET: '${{ secrets.TEST_SECRET }}'
+         QUALYS_USER: ${{ secrets.QUALYS_USER}}
+         QUALYS_PASSWORD: ${{ secrets.QUALYS_PASSWORD }}
+         TEST_SECRET: ${{ secrets.TEST_SECRET }}
          QUALYS_URL : 'https://qualysguard.qg2.apps.qualys.com'
       run: |
           echo "test : $TEST_SECRET"
