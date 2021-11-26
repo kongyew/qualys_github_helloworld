@@ -27,8 +27,8 @@ jobs:
       # Change ${{ github.repository }} variable by another image name if you want but don't forget changing also image-tag below
       run: docker build . --file Dockerfile --tag ${{ github.repository }}:latest
 
-    - name: Image digest
-      run: echo ${{ steps.docker_build.outputs.digest }}
+    # - name: Image digest
+    #   run: echo ${{ steps.docker_build.outputs.digest }}
     - name: Get sha
       #imagehash=$(docker push repo/image:tag | grep sha | cut -d ' ' -f 3)
       run: export SHA256=$(docker images --no-trunc --quiet ${{ github.repository }}:latest)
@@ -37,10 +37,8 @@ jobs:
       #imagehash=$(docker push repo/image:tag | grep sha | cut -d ' ' -f 3)
       run: export DIGEST=$(echo $SHA256  | cut -c8-)
 
-      
-
     - name: Tag docker  
-      run: docker tag ${{ github.repository }}:latest qualys_scan_target:$DIGEST
+      run: docker tag ${{ github.repository }}:latest qualys_scan_target:${{ env.DIGEST }}
 
 
     # reference : https://www.youtube.com/watch?v=dHuksXTLA2k
