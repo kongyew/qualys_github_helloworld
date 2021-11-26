@@ -48,6 +48,7 @@ jobs:
     - name: Get digest
       #imagehash=$(docker push repo/image:tag | grep sha | cut -d ' ' -f 3)
       run: |
+          echo "SHA256: $SHA256"  
           export DIGEST=$(echo $SHA256  | cut -c8-)
           export TAG="qualys_scan_target:$DIGEST"
           echo "DIGEST: $DIGEST" 
@@ -71,7 +72,7 @@ jobs:
         pwd
         ls ./.github/workflows/
         ls /home/runner/work/qualys_github_helloworld/qualys_github_helloworld/.github/workflows/qualysscript.sh 
-        cat /home/runner/work/qualys_github_helloworld/qualys_github_helloworld/.github/workflows/qualysscript.sh 
+        #cat /home/runner/work/qualys_github_helloworld/qualys_github_helloworld/.github/workflows/qualysscript.sh 
       shell: bash
 
     - name: Check the images
