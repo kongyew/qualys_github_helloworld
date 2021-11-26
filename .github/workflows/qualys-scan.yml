@@ -73,7 +73,6 @@ jobs:
         pwd
         ls ./.github/workflows/
         ls /home/runner/work/qualys_github_helloworld/qualys_github_helloworld/.github/workflows/qualysscript.sh 
-        #cat /home/runner/work/qualys_github_helloworld/qualys_github_helloworld/.github/workflows/qualysscript.sh 
       shell: bash
 
     - name: Check the images
