@@ -79,10 +79,11 @@ jobs:
          TEST_SECRET: ${{ secrets.TEST_SECRET }}
          QUALYS_URL : 'https://qualysguard.qg2.apps.qualys.com'
       run: |
-          chmod +x "${GITHUB_WORKSPACE}/.github/workflows/script.sh"
+          #chmod +x "${GITHUB_WORKSPACE}/.github/workflows/script.sh"
           chmod +x "${GITHUB_WORKSPACE}/.github/workflows/qualysscript.sh"
           echo "test : $TEST_SECRET"
           echo "USER : $QUALYS_USER"
+          echo "digest: $DIGEST"
           
           chmod +x "/home/runner/work/qualys_github_helloworld/qualys_github_helloworld/.github/workflows/qualysscript.sh"
           # run script echo "validateimage.sh <Qualys API Server> <Username> <Password> <Image Id|Name>"
