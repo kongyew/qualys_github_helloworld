@@ -99,7 +99,7 @@ else
 	IMAGE_ID=${IMAGE}
 fi
 
-TOKEN=$(curl -s -X POST   $QUALYS_API_SERVER/auth -d 'username=$USERNAME&password=$PASSWORD&token=true' -H 'Content-Type: application/x-www-form-urlencoded') 
+TOKEN=$(curl -s -X POST $QUALYS_API_SERVER/auth -d "username=${USERNAME}&password=${PASSWORD}&token=true" -H 'Content-Type: application/x-www-form-urlencoded') 
 
 echo "TOKEN : $TOKEN"
 
