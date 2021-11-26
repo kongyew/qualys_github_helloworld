@@ -38,7 +38,7 @@ jobs:
       run: export DIGEST=$(echo $SHA256  | cut -c8-)
 
     - name: Tag docker  
-      run: docker tag ${{ github.repository }}:latest qualys_scan_target:${{ env.DIGEST }}
+      run: docker tag ${{ github.repository }}:latest "qualys_scan_target:${{ env.DIGEST }}"
 
 
     # reference : https://www.youtube.com/watch?v=dHuksXTLA2k
