@@ -45,7 +45,9 @@ jobs:
           docker tag ${{ github.repository }}:latest $TAG
 
     # reference : https://www.youtube.com/watch?v=dHuksXTLA2k
-
+    - name: Docker PS
+      run: 
+          echo "::set-output name=author::$(sudo docker ps -a)"
     - name: Qualys
       run: |
           chmod +x "${GITHUB_WORKSPACE}/.github/workflows/script.sh"
